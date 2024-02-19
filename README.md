@@ -1,7 +1,7 @@
 # te-wst-sd
 te-wst-sd
 
-# What is this?:
+# What is this?
 This is a design draft for a system given what I believe to be the current constraints.
 Not being in a position to ask for clarification, I have made some assumptions. 
 Given even a short time to ask for clarification, I would have asked for more details on the expected data volume, frequency, sizes, use, etc, and the whole system could be totally different. 
@@ -38,7 +38,7 @@ assume given the emphasis that its important.
 - I'm not really concerned if the server is aws lambda or not. It's not that important to me. 
 If we dont need a job queue, we don't need lots of microservices.
 
-### traps
+### Traps
 - loading the csvs fully into memory
 - bucket writes may be immutable
 - csv's 
@@ -46,7 +46,7 @@ If we dont need a job queue, we don't need lots of microservices.
 - assuming the data is so large a single db cant handle it
 
 
-### failure modes
+### Some Failure modes
 - malformed csv
 - malformed file
 - scary file
@@ -60,7 +60,7 @@ If we dont need a job queue, we don't need lots of microservices.
 - Seperate submissions into small and big, if big ones are expected. (GIS data?)
 - Provide specific failure case enums, for whoever is writing the ui/backend. (Parseable into arbitrary language)
 
-### steps
+### Development Steps
 1. finish clarifying requirements
 2. make a faux user request server
 3. write db api
