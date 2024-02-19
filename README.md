@@ -21,6 +21,7 @@ All request success and rejection states will be clearly defined, and strictly a
 ## Excalidraw System Diagram
 https://excalidraw.com/#json=Gj5jvj2byTdAJr0Ac4toD,sXYLfmFhpNFtwuiloqdh_w
 - check excalidraw.svg
+- check diagram.png
 
 # Thought Process 
 This was pretty much how it happened.
