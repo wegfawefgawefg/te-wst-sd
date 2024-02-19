@@ -37,7 +37,7 @@ assume given the emphasis that its important.
 - Store the transactions in a database, and then have a lambda function that reads the csv and appends to the correct table. This allows for metadata on the added data, and gives some fault tolerance for undoing, etc.
 - Provide specific failure case enums, for whoever is writing the ui/backend. (Parseable into arbitrary language)
 
-## steps
+### steps
 1. finish clarifying requirements
 2. make a faux user request server
 3. write db api
