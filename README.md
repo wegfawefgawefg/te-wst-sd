@@ -6,13 +6,23 @@ This is a design draft for a system given what I believe to be the current const
 Not being in a position to ask for clarification, I have made some assumptions. 
 Given even a short time to ask for clarification, I would have asked for more details on the expected data volume, frequency, sizes, use, etc, and the whole system could be totally different. 
 
-## The Big Assumption
-- data is being submitted by users, potentially large files, irregularly.
+## The Big Assumptions
+- small data may be submitted by machines, regularly.
+- large data is being submitted, irregularly. (maybe by humans via interface)
+- deployment architecture choice is not a strict requirement, as long as the requirements are met.
 
-# Excalidraw System Diagram
+# Overview
+There is a server that is managing requests to a database. 
+Ive chosen to ignore the CSV requirement, and go with a sql style database.
+Normal database backups and versioning gives data fault tolerance.
+Small submissions are handled by the server, and large submissions handled in parts via streaming.
+All request success and rejection states will be clearly defined, and strictly adhered to.
+
+## Excalidraw System Diagram
 https://excalidraw.com/#json=Gj5jvj2byTdAJr0Ac4toD,sXYLfmFhpNFtwuiloqdh_w
 - check excalidraw.svg
 
+# Process 
 ## Initial Thoughts, and Required Clarification
 - If I expected tons of tiny requests, I would go with a job queue and workers.
 - How do I know which csv file to append to?
@@ -25,6 +35,8 @@ assume given the emphasis that its important.
 - Speed limitations means for a non compiled language, we're looking at a job queue.
 - The system should be designed to minimize costs. (How about development costs, lets avoid the microservices.)
     If we need to scale, we can make a job queue, and have workers later.
+- I'm not really concerned if the server is aws lambda or not. It's not that important to me. 
+If we dont need a job queue, we don't need lots of microservices.
 
 ### traps
 - loading the csvs fully into memory
