@@ -6,6 +6,8 @@ This is a design draft for a system given what I believe to be the current const
 Not being in a position to ask for clarification, I have made some assumptions. 
 Given even a short time to ask for clarification, I would have asked for more details on the expected data volume, frequency, sizes, use, etc, and the whole system could be totally different. 
 
+There's a diagram and some starter source code. 
+
 ## The Big Assumptions
 - small data may be submitted by machines, regularly.
 - large data is being submitted, irregularly. (maybe by humans via interface)
