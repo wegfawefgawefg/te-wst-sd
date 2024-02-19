@@ -22,29 +22,31 @@ All request success and rejection states will be clearly defined, and strictly a
 https://excalidraw.com/#json=Gj5jvj2byTdAJr0Ac4toD,sXYLfmFhpNFtwuiloqdh_w
 - check excalidraw.svg
 
-# Process 
+# Thought Process 
+This was pretty much how it happened.
+
 ## Initial Thoughts, and Required Clarification
-- If I expected tons of tiny requests, I would go with a job queue and workers.
-- How do I know which csv file to append to?
-- Why am I storing these as physical csv files on bucket? What the #!@&?
+- If I expected many tiny requests beyond a certain frequency, I would go with a job queue and workers.
+- How do I know which csv file to append to? That's not mentioned in the requirements.
+- Why am I storing these as physical csv files on bucket?
 - What kind of data volume are we expecting here?
-- Serverless... Lets assume AWS Lambda? 
+- lets assume the intention was a swarm of kubernetes managed AWS Lambdas, and a job queue.
 - 3 hours is very short for such important decisions.
 - Fault tolerance and speed were emphasized a few times, unfortunately I cannot ask for clarification, but I will 
 assume given the emphasis that its important.
-- Speed limitations means for a non compiled language, we're looking at a job queue.
 - The system should be designed to minimize costs. (How about development costs, lets avoid the microservices.)
-    If we need to scale, we can make a job queue, and have workers later.
+    If we need to scale, we can do the job queue, and have workers later. 
+    That transition would actually keep the database part, and the job queue would be an intermediate step.
+    The actual workers could run essentially the same server code that currently exists.
 - I'm not really concerned if the server is aws lambda or not. It's not that important to me. 
-If we dont need a job queue, we don't need lots of microservices.
 
-### Traps
+
+### Maybe Traps
 - loading the csvs fully into memory
 - bucket writes may be immutable
 - csv's 
 - amazon bucket
 - assuming the data is so large a single db cant handle it
-
 
 ### Some Failure modes
 - malformed csv
@@ -55,10 +57,12 @@ If we dont need a job queue, we don't need lots of microservices.
 - too many requests
 - file too big
 
-## Realistic Plan
+### Realistic Plan
 - Store the transactions in a database, and then have a server/awslambda that reads the csv and appends to the correct table. This allows for metadata on the added data, and gives some fault tolerance for undoing, etc.
 - Seperate submissions into small and big, if big ones are expected. (GIS data?)
 - Provide specific failure case enums, for whoever is writing the ui/backend. (Parseable into arbitrary language)
+
+### Open up Excalidraw and Make a Diagram
 
 ### Development Steps
 1. finish clarifying requirements
