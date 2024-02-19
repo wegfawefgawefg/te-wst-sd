@@ -1,7 +1,7 @@
 # te-wst-sd
 te-wst-sd
 
-# IMPORTANT:
+# What is this?:
 This is a design draft for a system given what I believe to be the current constraints.
 Not being in a position to ask for clarification, I have made some assumptions. 
 Given even a short time to ask for clarification, I would have asked for more details on the expected data volume, frequency, sizes, use, etc, and the whole system could be totally different. 
