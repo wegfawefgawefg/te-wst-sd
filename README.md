@@ -1,11 +1,20 @@
 # te-wst-sd
 te-wst-sd
 
+# IMPORTANT:
+This is a design draft for a system given what I believe to be the current constraints.
+Not being in a position to ask for clarification, I have made some assumptions. 
+Given even a short time to ask for clarification, I would have asked for more details on the expected data volume, frequency, sizes, use, etc, and the whole system could be totally different. 
+
+## The Big Assumption
+- data is being submitted by users, potentially large files, irregularly.
+
 # Excalidraw System Diagram
 https://excalidraw.com/#json=Gj5jvj2byTdAJr0Ac4toD,sXYLfmFhpNFtwuiloqdh_w
 - check excalidraw.svg
 
 ## Initial Thoughts, and Required Clarification
+- If I expected tons of tiny requests, I would go with a job queue and workers.
 - How do I know which csv file to append to?
 - Why am I storing these as physical csv files on bucket? What the #!@&?
 - What kind of data volume are we expecting here?
@@ -22,6 +31,7 @@ assume given the emphasis that its important.
 - bucket writes may be immutable
 - csv's 
 - amazon bucket
+- assuming the data is so large a single db cant handle it
 
 
 ### failure modes
@@ -34,7 +44,8 @@ assume given the emphasis that its important.
 - file too big
 
 ## Realistic Plan
-- Store the transactions in a database, and then have a lambda function that reads the csv and appends to the correct table. This allows for metadata on the added data, and gives some fault tolerance for undoing, etc.
+- Store the transactions in a database, and then have a server/awslambda that reads the csv and appends to the correct table. This allows for metadata on the added data, and gives some fault tolerance for undoing, etc.
+- Seperate submissions into small and big, if big ones are expected. (GIS data?)
 - Provide specific failure case enums, for whoever is writing the ui/backend. (Parseable into arbitrary language)
 
 ### steps
